@@ -2,13 +2,13 @@
 
 namespace App\Objects\Form;
 
-class BlackJack extends \Core\Page\Objects\Form {
+class BlackJackBet extends \Core\Page\Objects\Form {
 
     public function __construct() {
         parent::__construct([
-            'fields' => [
+            'fields' => [                
                 'bet' => [
-                    'label' => 'Place a bet',
+                    'label' => 'bet',
                     'type' => 'number',
                     'placeholder' => '0',
                     'validate' => [

@@ -95,3 +95,7 @@ form select {
     text-align: center;
     padding: 10px;
 }
+
+.card {
+    height: 200px;
+}

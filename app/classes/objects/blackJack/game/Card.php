@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Objects\BlackJack;
+namespace App\Objects\BlackJack\Game;
 
 class Card {
 
@@ -12,18 +12,29 @@ class Card {
     public function __construct($data = null) {
         if (!$data) {
             $this->data = [
+                'id' => null,
                 'suit' => null,
                 'number' => null,
-                'value' => null
+                'value' => null,
+                'owner' => null
             ];
         } else {
             $this->setData($data);
         }
     }
 
+    public function getId() {
+        return $this->data['id'];
+    }
+    
+    public function setId($id) {
+        $this->data['id'] = $id;
+    }
+    
     public function getSuit() {
         return $this->data['suit'];
     }
+    
 
     public function setSuit(string $suit) {
         if (in_array($suit, [
@@ -46,6 +57,14 @@ class Card {
         ];
     }
 
+    public function getOwner() {
+        return $this->data['owner'];
+    }
+
+    public function setOwner(string $owner) {
+        $this->data['owner'] = $owner;
+    }
+
     public function getNumber() {
         return $this->data['number'];
     }
@@ -63,9 +82,11 @@ class Card {
     }
 
     public function setData(array $data) {
+        $this->setId($data['id'] ?? null);
         $this->setNumber($data['number'] ?? null);
         $this->setValue($data['value'] ?? null);
         $this->setSuit($data['suit'] ?? '');
+        $this->setOwner($data['owner'] ?? '');
     }
 
     public function getData() {

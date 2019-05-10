@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Objects\BlackJack;
+namespace App\Objects\BlackJack\Game;
 
 /* Like user repository */
 
@@ -10,18 +10,10 @@ class Deck {
     protected $deck = [];
     protected $model;
 
-    public function __construct() {
-        $this->create();
-    }
-
-    public function getDeck() {
-        return $this->deck;
-    }
-
     public function create() {
         $value = 0;
-
-        foreach (\App\Objects\BlackJack\Card::getSuitOptions() as $suit) {
+        $deck = [];
+        foreach (\App\Objects\BlackJack\Game\Card::getSuitOptions() as $suit) {
             for ($i = 2; $i < 15; $i++) {
                 if ($i == 14) {
                     $value = 11;
@@ -31,9 +23,11 @@ class Deck {
                     $value = $i;
                 }
                 $card = new Card(['suit' => $suit, 'number' => $i, 'value' => $value]);
-                $this->deck[] = $card;
+                $deck[] = $card;
             }
         }
+        shuffle($deck);
+        return $deck;
     }
 
 }

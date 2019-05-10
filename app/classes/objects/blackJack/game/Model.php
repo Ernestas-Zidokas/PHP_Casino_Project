@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Objects\BlackJack;
+namespace App\Objects\BlackJack\Game;
 
 class Model extends \Core\Database\Model {
 
@@ -25,7 +25,11 @@ class Model extends \Core\Database\Model {
                 'name' => 'value',
                 'type' => self::NUMBER_SHORT,
                 'flags' => [self::FLAG_NOT_NULL]
-            ]
+            ],
+            [
+                'name' => 'owner',
+                'type' => self::TEXT_SHORT
+            ],
         ]);
     }
 
