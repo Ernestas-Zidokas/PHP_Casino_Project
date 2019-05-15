@@ -16,6 +16,7 @@ class BlackJack extends Base {
     protected $form_play;
     protected $player_input_bet;
     protected $player_input_play;
+    protected $is_end_game;
 
     public function __construct() {
         if (!\App\App::$session->isLoggedIn() === true) {
@@ -32,6 +33,7 @@ class BlackJack extends Base {
         $this->balance = $this->user->getBalance();
         $this->form_bet = new \App\Objects\Form\BlackJackBet();
         $this->form_play = new \App\Objects\Form\BlackJackPlay();
+        $this->is_end_game = false;
 
         if (!$this->player) {
             $this->player = new \App\Objects\BlackJack\Player\Player([
@@ -92,6 +94,7 @@ class BlackJack extends Base {
                     }
                     if ($player_input_play['action'] == 'stand') {
                         $stand = $blackjack->stand();
+                        $this->is_end_game = true;
                         if ($stand == $blackjack::OUTCOME_WIN) {
                             $view = new \Core\Page\View([
                                 'status' => 'You won!',
@@ -124,6 +127,8 @@ class BlackJack extends Base {
 
                         $this->game_repo->deleteAll();
                         $this->player_repo->update($this->player);
+                        header('Location: /blackjack');
+                        exit();
                     }
                     break;
             }
@@ -132,7 +137,8 @@ class BlackJack extends Base {
             $cards = new \Core\Page\View([
                 'title' => 'Blackjack',
                 'dealer' => $blackjack->getDealersCards(),
-                'player' => $blackjack->getPlayerCards()
+                'player' => $blackjack->getPlayerCards(),
+                'endgame' => $this->is_end_game
             ]);
 
             $this->page['content'] .= $cards->render(ROOT_DIR . '/app/views/blackJack.tpl.php');
