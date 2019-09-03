@@ -1,6 +1,6 @@
-﻿# Team project: Pagaliau kartu
-## Featured:
-### Draugas Augustinas
-### Draugas Ernestas
-![GitHub Logo](public_html/images/friends.gif
-)
+﻿# Casino Project
+ Fake Casino with few games. Made with  framework that we made in CodeAcademy.
+ 
+ Register, Login, money adding, SlotMachines, BlackJack.
+ 
+ ## Made as final project to PHP OOP course.
